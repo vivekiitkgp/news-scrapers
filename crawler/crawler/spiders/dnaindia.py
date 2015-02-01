@@ -2,7 +2,7 @@ from scrapy.contrib.spiders import CrawlSpider, Rule
 from scrapy.contrib.linkextractors import LinkExtractor
 from crawler.items import NewsItem
 
-class TheHinduSpider(CrawlSpider):
+class DNAIndiaSpider(CrawlSpider):
     """ Spider to crawl the webpage of popular e-paper DNA India."""
 
     name = "DNA India"
