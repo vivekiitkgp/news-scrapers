@@ -1,20 +1,26 @@
 # -*- coding: utf-8 -*-
 
-# Define here the models for your scraped items
-#
-# See documentation in:
-# http://doc.scrapy.org/en/latest/topics/items.html
-
 import scrapy
 
+# Helper methods to aid serialization of data.
+def trim(content):
+    if isinstance(content, basestring):
+        return content.strip()
+    return map(lambda x: x.strip(), content)
+
+def serialize_content(content):
+    return "".join(trim(content))
 
 class NewsItem(scrapy.Item):
-    title = scrapy.Field()
-    headline = scrapy.Field()
-    author = scrapy.Field()
-    publisher = scrapy.Field()
-    summary = scrapy.Field()
-    content = scrapy.Field()
-    topics = scrapy.Field()
-    metadata = scrapy.Field()
+    """ News Item object """
+
+    url = scrapy.Field()
+    headline = scrapy.Field(serializer=serialize_content)
+    date = scrapy.Field(serializer=serialize_content)
+    author = scrapy.Field(serializer=serialize_content)
+    summary = scrapy.Field(serializer=serialize_content)
+    content = scrapy.Field(serializer=serialize_content)
+    topics = scrapy.Field(serializer=trim)
+    location = scrapy.Field(serializer=serialize_content)
     additional = scrapy.Field()
+    publisher = scrapy.Field()
